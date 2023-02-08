@@ -3,4 +3,8 @@
     <string name="title_overview">Overview</string>
     <string name="title_dashboard">Add medicine</string>
     <string name="title_notifications">Reminders</string>
+    <string name="descriptive_image_of_medicine">descriptive image of medicine</string>
+    <string name="dosageform">dosageForm</string>
+    <string name="friendlyname">friendlyName</string>
+    <string name="activeingredient">activeIngredient</string>
 </resources>
