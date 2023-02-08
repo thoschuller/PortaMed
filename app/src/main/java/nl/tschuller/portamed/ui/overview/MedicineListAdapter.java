@@ -21,6 +21,9 @@ import java.util.List;
 import nl.tschuller.portamed.Medicine;
 import nl.tschuller.portamed.R;
 
+/**
+ * Adapter class for the recyclerView with medications, controls the way medication is shown and
+ */
 public class MedicineListAdapter extends RecyclerView.Adapter<MedicineListAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -58,20 +61,31 @@ public class MedicineListAdapter extends RecyclerView.Adapter<MedicineListAdapte
         return new ViewHolder(medicineView);
     }
 
+    /**
+     *
+     * The main controller for the recyclerview containing the list of medications
+     *
+     * @param holder The ViewHolder which should be updated to represent the contents of the
+     *        item at the given position in the data set.
+     * @param position The position of the item within the adapter's data set.
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Medicine medicine = mMedicines.get(position);
 
+        //fetch views from viewholder
         TextView friendlyNameView = holder.friendlyNameTextView;
         TextView activeIngredientView = holder.activeIngredientTextView;
         TextView dosageFormView = holder.dosageFormTextView;
         ImageView previewImage = holder.medicineOverviewPreviewImageImageView;
 
+        //set the output text labels to the values from our medicine-object
         friendlyNameView.setText(medicine.getFriendlyName());
         activeIngredientView.setText(medicine.getActiveIngredient());
         dosageFormView.setText(medicine.getDosageForm());
         previewImage.setImageBitmap(medicine.getBoxExample());
 
+        //alternate colors for distinguishability
         int offwhite = ContextCompat.getColor(medicineView.getContext(), R.color.offwhite);
         int chambray = ContextCompat.getColor(medicineView.getContext(), R.color.chambray);
         if (position % 2 != 0) {
