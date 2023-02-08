@@ -68,6 +68,8 @@ public class AddMedicineFragment extends Fragment {
 
         options = new String[]{getString(R.string.take_photo), getString(R.string.pick_photo), getString(R.string.Cancel)};
 
+
+        //react to changing input values (disable the now unused inputs)
         rvgInput.addTextChangedListener(rvgWatcher);
         activeIngredientInput.addTextChangedListener(manualWatcher);
         brandInput.addTextChangedListener(manualWatcher);
@@ -77,6 +79,10 @@ public class AddMedicineFragment extends Fragment {
         return root;
     }
 
+    /**
+     * gets the elements from the xml view
+     * @param view
+     */
     private void assignEditTexts(View view){
         rvgInput = view.findViewById(R.id.rvg_number_input);
         friendlyNameInput = view.findViewById(R.id.friendly_name_input);
@@ -90,6 +96,9 @@ public class AddMedicineFragment extends Fragment {
         addImageButton.setOnClickListener(imageButtonListener);
     }
 
+    /**
+     * Listen for and process the pressing of the add button on the add medicine page, adds the medicine to the arraylist
+     */
     private final View.OnClickListener addButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -146,6 +155,19 @@ public class AddMedicineFragment extends Fragment {
 
     };
 
+    /**
+     * Gets back the result from the image intent
+     *
+     *
+     * @param requestCode The integer request code originally supplied to
+     *                    startActivityForResult(), allowing you to identify who this
+     *                    result came from.
+     * @param resultCode The integer result code returned by the child activity
+     *                   through its setResult().
+     * @param data An Intent, which can return result data to the caller
+     *               (various data can be attached to Intent "extras").
+     *
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
