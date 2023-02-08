@@ -22,6 +22,9 @@ import nl.tschuller.portamed.Medicine;
 import nl.tschuller.portamed.R;
 import nl.tschuller.portamed.databinding.FragmentOverviewBinding;
 
+/**
+ * main class for the overview tab, binds recycler to its adapter
+ */
 public class OverviewFragment extends Fragment {
 
     private FragmentOverviewBinding binding;
@@ -48,9 +51,6 @@ public class OverviewFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        for(int i = 0; i < 10; i++){
-//            medicines.add(new Medicine(new BigInteger("12345"), "vriendelijke naam" + i, "actief ingrediënt" +i, "merknaam" +i, "lorem ipsum referentia" +i, "pilletje" + i, ResourcesCompat.getDrawable(getResources(), R.drawable.ic_dashboard_black_24dp, null)));
-//        }
     }
 
     @Override
