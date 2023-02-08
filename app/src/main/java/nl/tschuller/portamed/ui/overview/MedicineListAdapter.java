@@ -1,7 +1,9 @@
 package nl.tschuller.portamed.ui.overview;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,7 +70,7 @@ public class MedicineListAdapter extends RecyclerView.Adapter<MedicineListAdapte
         friendlyNameView.setText(medicine.getFriendlyName());
         activeIngredientView.setText(medicine.getActiveIngredient());
         dosageFormView.setText(medicine.getDosageForm());
-        previewImage.setImageDrawable(medicine.getBoxExample());
+        previewImage.setImageBitmap(medicine.getBoxExample());
 
         int offwhite = ContextCompat.getColor(medicineView.getContext(), R.color.offwhite);
         int chambray = ContextCompat.getColor(medicineView.getContext(), R.color.chambray);

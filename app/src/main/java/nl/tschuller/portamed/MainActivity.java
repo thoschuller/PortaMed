@@ -10,11 +10,16 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import java.util.ArrayList;
+
 import nl.tschuller.portamed.databinding.ActivityMainBinding;
+import nl.tschuller.portamed.ui.add_medicine.AddMedicineFragment;
+import nl.tschuller.portamed.ui.overview.OverviewFragment;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    private ArrayList<Medicine> medicines = new ArrayList<>();
 
 
     @Override
@@ -34,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-
     }
+
+    public ArrayList<Medicine> getMedicines(){return medicines;}
 
 }

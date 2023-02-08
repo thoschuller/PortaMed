@@ -137,6 +137,12 @@
                 android:inputType="textShortMessage" />
 
             <Button
+                android:id="@+id/image_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/add_image_to_medicine" />
+
+            <Button
                 android:id="@+id/add_medicine_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -17,6 +17,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+import nl.tschuller.portamed.MainActivity;
 import nl.tschuller.portamed.Medicine;
 import nl.tschuller.portamed.R;
 import nl.tschuller.portamed.databinding.FragmentOverviewBinding;
@@ -25,7 +26,7 @@ public class OverviewFragment extends Fragment {
 
     private FragmentOverviewBinding binding;
     private RecyclerView rvMedicines;
-    private List<Medicine> medicines = new ArrayList<Medicine>();
+    public ArrayList<Medicine> medicines;
     View v;
 
 
@@ -34,6 +35,9 @@ public class OverviewFragment extends Fragment {
 
         binding = FragmentOverviewBinding.inflate(inflater, container, false);
         rvMedicines = (RecyclerView) binding.getRoot().findViewById(R.id.medicineListRecyclerView);
+
+        medicines = ((MainActivity)getActivity()).getMedicines();
+
         MedicineListAdapter adapter = new MedicineListAdapter(medicines);
         rvMedicines.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvMedicines.setAdapter(adapter);
@@ -44,9 +48,9 @@ public class OverviewFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        for(int i = 0; i < 10; i++){
-            medicines.add(new Medicine(new BigInteger("12345"), "vriendelijke naam" + i, "actief ingrediënt" +i, "merknaam" +i, "lorem ipsum referentia" +i, "pilletje" + i, ResourcesCompat.getDrawable(getResources(), R.drawable.ic_dashboard_black_24dp, null)));
-        }
+//        for(int i = 0; i < 10; i++){
+//            medicines.add(new Medicine(new BigInteger("12345"), "vriendelijke naam" + i, "actief ingrediënt" +i, "merknaam" +i, "lorem ipsum referentia" +i, "pilletje" + i, ResourcesCompat.getDrawable(getResources(), R.drawable.ic_dashboard_black_24dp, null)));
+//        }
     }
 
     @Override

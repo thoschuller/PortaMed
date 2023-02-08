@@ -3,6 +3,7 @@ package nl.tschuller.portamed;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
+import android.os.Parcelable;
 
 import java.lang.reflect.Field;
 import java.math.BigInteger;
@@ -20,9 +21,9 @@ public class Medicine {
     private String brand;
     private String reference;
     private String dosageForm;
-    private Drawable boxExample;
+    private Bitmap boxExample;
 
-    public Medicine(BigInteger rvgNumber, String friendlyName, String activeIngredient, String brand, String reference, String dosageForm, Drawable boxExample) {
+    public Medicine(BigInteger rvgNumber, String friendlyName, String activeIngredient, String brand, String reference, String dosageForm, Bitmap boxExample) {
         this.activeIngredient = activeIngredient;
         this.rvgNumber = rvgNumber;
         this.friendlyName = friendlyName;
@@ -122,11 +123,11 @@ public class Medicine {
         this.dosageForm = dosageForm;
     }
 
-    public Drawable getBoxExample() {
+    public Bitmap getBoxExample() {
         return boxExample;
     }
 
-    public void setBoxExample(Drawable boxExample) {
+    public void setBoxExample(Bitmap boxExample) {
         this.boxExample = boxExample;
     }
 }

@@ -19,4 +19,12 @@
     <string name="dosage_form_labell">dosage form:</string>
     <string name="dosage_form_hint">enter the dosage form here</string>
     <string name="add_medicine_button">Add medicine</string>
+    <string name="medicine_added_toast">Medicine added!</string>
+    <string name="no_friendly_name_alert_title">Field not filled</string>
+    <string name="no_friendly_name_alert_message">You need to enter a recognizable name</string>
+    <string name="add_image_to_medicine">Add image to medicine</string>
+    <string name="image_dialog_title">How would you like to select an image?</string>
+    <string name="take_photo">Take a photo</string>
+    <string name="pick_photo">Pick a photo form gallery</string>
+    <string name="Cancel">Cancel</string>
 </resources>
