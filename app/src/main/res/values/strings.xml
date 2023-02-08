@@ -7,4 +7,16 @@
     <string name="dosageform">dosageForm</string>
     <string name="friendlyname">friendlyName</string>
     <string name="activeingredient">activeIngredient</string>
+    <string name="add_medicine_description_text">You can add medications here, either by using the rvg-number or by supplying the details manually</string>
+    <string name="recognizable_name_label">Recognizable name (only visible for you):</string>
+    <string name="recognizable_name_hint">enter a name here</string>
+    <string name="rvg_number_label">rvg number:</string>
+    <string name="rvg_number_hint">enter rvg number here</string>
+    <string name="active_ingredient_label">active ingredient:</string>
+    <string name="active_ingredient_hint">enter the active ingredient here</string>
+    <string name="brand_label">brand:</string>
+    <string name="brand_hint">enter the name of the brand here</string>
+    <string name="dosage_form_labell">dosage form:</string>
+    <string name="dosage_form_hint">enter the dosage form here</string>
+    <string name="add_medicine_button">Add medicine</string>
 </resources>
