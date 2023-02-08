@@ -16,6 +16,11 @@ import nl.tschuller.portamed.databinding.ActivityMainBinding;
 import nl.tschuller.portamed.ui.add_medicine.AddMedicineFragment;
 import nl.tschuller.portamed.ui.overview.OverviewFragment;
 
+/**
+ * Small application for keeping track of medicines
+ *
+ * @author Thomas Schuller
+ */
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
@@ -30,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
@@ -41,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Main arraylist used for storing the added medicines during runtime
+     * @return the main arraylist-object
+     */
     public ArrayList<Medicine> getMedicines(){return medicines;}
 
 }

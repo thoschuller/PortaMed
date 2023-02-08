@@ -5,6 +5,8 @@ import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.Parcelable;
 
+import androidx.core.content.res.ResourcesCompat;
+
 import java.lang.reflect.Field;
 import java.math.BigInteger;
 import java.util.Objects;
@@ -23,6 +25,17 @@ public class Medicine {
     private String dosageForm;
     private Bitmap boxExample;
 
+    /**
+     * Data model for storing information about medications
+     *
+     * @param rvgNumber the rvg-registration number of the medication
+     * @param friendlyName a user-recognizable name
+     * @param activeIngredient the active ingrediënt used in the medication
+     * @param brand the name of the brand that makes the medication
+     * @param reference a reference for the medication (as obtained from the rvg-dataset)
+     * @param dosageForm a short string containing the way in which the medication will be dosed (eg. "pill")
+     * @param boxExample an image so the user can recognize the medication
+     */
     public Medicine(BigInteger rvgNumber, String friendlyName, String activeIngredient, String brand, String reference, String dosageForm, Bitmap boxExample) {
         this.activeIngredient = activeIngredient;
         this.rvgNumber = rvgNumber;
