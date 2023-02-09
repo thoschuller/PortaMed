@@ -10,6 +10,11 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 
 import nl.tschuller.portamed.databinding.ActivityMainBinding;
@@ -24,12 +29,25 @@ import nl.tschuller.portamed.ui.overview.OverviewFragment;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    private ArrayList<Medicine> medicines = new ArrayList<>();
+    IO io;
+    private ArrayList<Medicine> medicines;
+
+    public MainActivity() throws GeneralSecurityException, IOException, ClassNotFoundException {
+    }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        io = new IO(this);
+        Serializable medicineFileContent = null;
+        try {
+            medicineFileContent = io.readEncryptedFile("medicines");
+        } catch (GeneralSecurityException | IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        medicines = medicineFileContent == null ? new ArrayList<>() : (ArrayList<Medicine>) medicineFileContent;
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -45,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
+
     }
 
     /**
@@ -53,4 +72,14 @@ public class MainActivity extends AppCompatActivity {
      */
     public ArrayList<Medicine> getMedicines(){return medicines;}
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        try {
+            io.writeEncryptedFile("medicines", medicines);
+        } catch (IOException | GeneralSecurityException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

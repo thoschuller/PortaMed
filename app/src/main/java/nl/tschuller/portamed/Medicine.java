@@ -1,12 +1,16 @@
 package nl.tschuller.portamed;
 
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
+import android.graphics.BitmapFactory;
 import android.media.Image;
-import android.os.Parcelable;
 
-import androidx.core.content.res.ResourcesCompat;
-
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.math.BigInteger;
 import java.util.Objects;
@@ -16,7 +20,7 @@ import java.util.Objects;
  *
  * @author Thomas Schuller
  */
-public class Medicine {
+public class Medicine implements Externalizable {
     private String activeIngredient;
     private BigInteger rvgNumber;
     private String friendlyName;
@@ -28,13 +32,13 @@ public class Medicine {
     /**
      * Data model for storing information about medications
      *
-     * @param rvgNumber the rvg-registration number of the medication
-     * @param friendlyName a user-recognizable name
+     * @param rvgNumber        the rvg-registration number of the medication
+     * @param friendlyName     a user-recognizable name
      * @param activeIngredient the active ingrediënt used in the medication
-     * @param brand the name of the brand that makes the medication
-     * @param reference a reference for the medication (as obtained from the rvg-dataset)
-     * @param dosageForm a short string containing the way in which the medication will be dosed (eg. "pill")
-     * @param boxExample an image so the user can recognize the medication
+     * @param brand            the name of the brand that makes the medication
+     * @param reference        a reference for the medication (as obtained from the rvg-dataset)
+     * @param dosageForm       a short string containing the way in which the medication will be dosed (eg. "pill")
+     * @param boxExample       an image so the user can recognize the medication
      */
     public Medicine(BigInteger rvgNumber, String friendlyName, String activeIngredient, String brand, String reference, String dosageForm, Bitmap boxExample) {
         this.activeIngredient = activeIngredient;
@@ -46,6 +50,10 @@ public class Medicine {
         this.boxExample = boxExample;
 
         if (rvgNumber != null) retrieveFromRvg(false);
+    }
+
+    public Medicine(){
+
     }
 
     /**
@@ -142,5 +150,49 @@ public class Medicine {
 
     public void setBoxExample(Bitmap boxExample) {
         this.boxExample = boxExample;
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput objectOutput) throws IOException {
+        byte[] bitmapBytes = new byte[0];
+        if (this.boxExample != null) {
+            ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+            boxExample.compress(Bitmap.CompressFormat.PNG, 0, byteStream);
+            bitmapBytes = byteStream.toByteArray();
+        } else {
+            bitmapBytes = null;
+        }
+
+        objectOutput.writeObject(new Serializable[]{this.activeIngredient,
+                this.rvgNumber,
+                this.friendlyName,
+                this.brand,
+                this.reference,
+                this.dosageForm,
+                bitmapBytes});
+    }
+
+    @Override
+    public void readExternal(ObjectInput objectInput) throws ClassNotFoundException, IOException {
+        Serializable[] sArr = (Serializable[]) objectInput.readObject();
+        this.activeIngredient = (String) sArr[0];
+        this.rvgNumber = (BigInteger) sArr[1];
+        this.friendlyName = (String) sArr[2];
+        this.brand = (String) sArr[3];
+        this.reference = (String) sArr[4];
+        this.dosageForm = (String) sArr[5];
+        byte[] serializedBitmapBytes = (byte[]) sArr[6];
+
+        if (serializedBitmapBytes == null) {
+            this.boxExample = null;
+        } else {
+            ByteArrayInputStream byteInStream = new ByteArrayInputStream(serializedBitmapBytes);
+            ByteArrayOutputStream byteOutStream = new ByteArrayOutputStream();
+            int b;
+            while ((b = byteInStream.read()) != -1)
+                byteOutStream.write(b);
+            byte[] bitmapBytes = byteOutStream.toByteArray();
+            this.boxExample = BitmapFactory.decodeByteArray(bitmapBytes, 0, bitmapBytes.length);
+        }
     }
 }
